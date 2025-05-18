@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FocusFlow</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Custom titlebar with sound controls -->
+    <div class="titlebar">
+      <div class="titlebar-text">JapeDev</div>
+      <div class="sound-controls-compact">
+        <div class="sound-toggle">
+          <label for="sound-toggle">Sound</label>
+          <div class="toggle-switch">
+            <input type="checkbox" id="sound-toggle" checked>
+            <span class="toggle-slider"></span>
+          </div>
+        </div>
+        <div class="volume-control">
+          <input type="range" id="volume-slider" min="0" max="100" value="70">
+        </div>
+      </div>
+      <div class="titlebar-controls">
+        <button id="minimize-btn" class="titlebar-button">
+          <svg width="10" height="1" viewBox="0 0 10 1">
+            <path d="M0 0h10v1H0z" fill="currentColor"/>
+          </svg>
+        </button>
+        <button id="close-btn" class="titlebar-button">
+          <svg width="10" height="10" viewBox="0 0 10 10">
+            <path d="M1 1l8 8m0-8l-8 8" stroke="currentColor" stroke-width="1.5"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+    <!-- Main content -->
+    <div class="app-content">
+      <!-- Charizard Animation Container -->
+      <div class="charizard-container">
+        <img id="charizard-animation" src="assets/frame_00_delay-0.06s.gif" alt="">
+      </div>
+      <div class="timer-container">
+        <div class="timer-display">
+          <span id="minutes">25</span>:<span id="seconds">00</span>
+        </div>
+        <div class="timer-progress">
+          <div id="progress-bar" class="progress-bar"></div>
+        </div>
+      </div>
+      <div class="session-info">
+        <h2 id="session-label">Focus Session</h2>
+        <p id="session-count">Session #1</p>
+      </div>
+      <div class="controls">
+        <button id="start-btn" class="control-btn primary">Start</button>
+        <button id="pause-btn" class="control-btn" disabled>Pause</button>
+        <button id="reset-btn" class="control-btn">Reset</button>
+      </div>
+      <div class="settings">
+        <div class="setting-group">
+          <label for="focus-time">Focus Time (minutes)</label>
+          <input type="number" id="focus-time" min="1" max="60" value="25">
+        </div>
+        <div class="setting-group">
+          <label for="short-break">Short Break (minutes)</label>
+          <input type="number" id="short-break" min="1" max="30" value="5">
+        </div>
+        <div class="setting-group">
+          <label for="long-break">Long Break (minutes)</label>
+          <input type="number" id="long-break" min="1" max="60" value="15">
+        </div>
+        <div class="setting-group">
+          <label for="sessions">Sessions until long break</label>
+          <input type="number" id="sessions" min="1" max="10" value="4">
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="renderer.js"></script>
+</body>
+</html>

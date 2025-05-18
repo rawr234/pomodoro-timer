@@ -1,0 +1,380 @@
+/* styles.css - Updated with compact sound controls in titlebar */
+:root {
+  /* Theme Colors */
+  --focus-primary: #eb6841;
+  --focus-secondary: #00a8c6;
+  --focus-background: #fdfdfd;
+  --short-break-primary: #00a8c6;
+  --short-break-secondary: #eb6841;
+  --short-break-background: #f1f8f9;
+  --long-break-primary: #2e6e91;
+  --long-break-secondary: #61ae61;
+  --long-break-background: #f0f7f3;
+  
+  --text-color: #2c3e50;
+  --text-secondary: #7f8c8d;
+  --border-radius: 12px;
+  --box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  --transition: all 0.3s ease;
+  
+  /* Default colors will be focus mode */
+  --primary-color: var(--focus-primary);
+  --secondary-color: var(--focus-secondary);
+  --bg-color: var(--focus-background);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  user-select: none;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background-color: rgba(0, 0, 0, 0);
+  color: var(--text-color);
+  overflow: hidden;
+  transition: var(--transition);
+}
+
+body.focus {
+  --primary-color: var(--focus-primary);
+  --secondary-color: var(--focus-secondary);
+  --bg-color: var(--focus-background);
+}
+
+body.shortBreak {
+  --primary-color: var(--short-break-primary);
+  --secondary-color: var(--short-break-secondary);
+  --bg-color: var(--short-break-background);
+}
+
+body.longBreak {
+  --primary-color: var(--long-break-primary);
+  --secondary-color: var(--long-break-secondary);
+  --bg-color: var(--long-break-background);
+}
+
+.app-container {
+  width: 360px;
+  height: 620px; /* Reduced height since sound controls are in titlebar */
+  background-color: var(--bg-color);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  overflow: hidden;
+  transition: var(--transition);
+}
+
+/* Custom Titlebar with sound controls */
+.titlebar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--primary-color);
+  color: white;
+  height: 42px; /* Slightly increased height */
+  padding: 0 12px;
+  -webkit-app-region: drag; /* Makes the titlebar draggable */
+}
+
+.titlebar-text {
+  font-weight: 600;
+  font-size: 14px;
+  flex: 0 0 60px;
+}
+
+/* Sound Controls in Titlebar */
+.sound-controls-compact {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  -webkit-app-region: no-drag; /* Make controls clickable */
+  flex: 1;
+}
+
+.sound-toggle {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.sound-toggle label {
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.volume-control {
+  flex: 1;
+  max-width: 90px;
+}
+
+/* Toggle Switch - Smaller for titlebar */
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 32px;
+  height: 16px;
+  cursor: pointer;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.3);
+  transition: .4s;
+  border-radius: 16px;
+}
+
+.toggle-slider:before {
+  position: absolute;
+  content: "";
+  height: 12px;
+  width: 12px;
+  left: 2px;
+  bottom: 2px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+input:checked + .toggle-slider {
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+input:focus + .toggle-slider {
+  box-shadow: 0 0 1px white;
+}
+
+input:checked + .toggle-slider:before {
+  transform: translateX(16px);
+}
+
+/* Volume Slider - Smaller for titlebar */
+#volume-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.3);
+  outline: none;
+}
+
+#volume-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: white;
+  cursor: pointer;
+}
+
+#volume-slider::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: white;
+  cursor: pointer;
+}
+
+.titlebar-controls {
+  display: flex;
+  -webkit-app-region: no-drag; /* Make buttons clickable */
+}
+
+.titlebar-button {
+  width: 30px;
+  height: 30px;
+  background-color: transparent;
+  border: none;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin-left: 4px;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.titlebar-button:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.titlebar-button:active {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+/* App Content */
+.app-content {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - 42px);
+  position: relative;
+}
+
+/* Charizard Animation */
+.charizard-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 5px;
+  position: relative;
+  height: 130px;
+}
+
+#charizard-animation {
+  height: 130px;
+  width: auto;
+  object-fit: contain;
+  image-rendering: pixelated; /* Keep pixel art crisp */
+}
+
+/* Timer Display */
+.timer-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.timer-display {
+  font-size: 70px;
+  font-weight: 700;
+  color: var(--primary-color);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -2px;
+  margin-bottom: 10px;
+  transition: var(--transition);
+}
+
+.timer-progress {
+  width: 100%;
+  height: 8px;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  width: 0;
+  background-color: var(--primary-color);
+  transition: width 1s linear, background-color 0.3s ease;
+}
+
+/* Session Info */
+.session-info {
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.session-info h2 {
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--primary-color);
+  margin-bottom: 4px;
+  transition: var(--transition);
+}
+
+.session-info p {
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+/* Controls */
+.controls {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.control-btn {
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+  outline: none;
+  background-color: #eee;
+  color: var(--text-color);
+}
+
+.control-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.control-btn:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+.control-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.control-btn.primary {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+/* Settings */
+.settings {
+  margin-top: auto;
+  padding-top: 10px;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.setting-group {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.setting-group:last-child {
+  margin-bottom: 0;
+}
+
+.setting-group label {
+  font-size: 14px;
+  color: var(--text-secondary);
+  flex: 1;
+}
+
+.setting-group input {
+  width: 60px;
+  padding: 6px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  text-align: center;
+  font-size: 14px;
+}
+
+.setting-group input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+.setting-group input:disabled {
+  background-color: #f5f5f5;
+  color: #999;
+  cursor: not-allowed;
+}

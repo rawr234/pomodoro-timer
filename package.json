@@ -1,0 +1,33 @@
+
+{
+  "name": "focusflow",
+  "productName": "Japedev",
+  "version": "1.0.0",
+  "description": "A modern Pomodoro timer for focused work sessions Developed by: Jaspher Paul Paloma",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder"
+  },
+  "author": "Jaspher Paul Paloma",
+  "license": "Student",
+  "devDependencies": {
+    "electron": "^20.0.0",
+    "electron-builder": "^23.0.3"
+  },
+  "build": {
+    "appId": "jaspherpaul6@gmail.com",
+    "mac": {
+      "category": "public.app-category.productivity",
+       "icon": "assets/icon.icns"
+    },
+    "win": {
+      "target": ["nsis"],
+      "icon": "assets/icon.ico"
+    },
+    "linux": {
+      "target": ["AppImage", "deb"],
+      "icon": "assets/icon.png"
+    }
+  }
+}
